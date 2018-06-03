@@ -1,27 +1,9 @@
-/*
-
-Find 3 numbers such that their sum is equal to the target
-
-v = < 1, -1, 4, 2 >
-target = 4
-output = < 1, -1, 4 >
-sum = 4
-
-Approach 1: For each number in v, perform two_sum
-def two_sum(v, target):
-
-
-*/
-
 #include <iostream>
+#include <cstddef>
 #include <vector>
 #include <unordered_map>
 
 using namespace std;
-
-vector<int> three_sum(vector<int> V, int target) {
-
-}
 
 /*
 
@@ -56,8 +38,42 @@ vector<int> two_sum(vector<int> V, int target) {
       return vector<int>{map[v], v};
     }
   }
+
+  return vector<int>{};
 }
 
+/*
+
+Find 3 numbers such that their sum is equal to the target
+
+v = < 1, -1, 4, 2 >
+target = 4
+output = < 1, -1, 4 >
+sum = 4
+
+Approach 1: For each number in v, perform two_sum
+def two_sum(v, target):
+
+*/
+
+vector<int> three_sum(vector<int> V, int target) {
+  for(int i = 0; i < V.size(); i++) {
+    int diff = target - V[i];
+    vector<int> output = two_sum(vector<int>{&V[i],&V[V.size()-1]}, diff);
+    if(output.size() != 0) {
+      output.push_back(V[i]);
+      return output;
+    }
+  }
+  return vector<int>{};
+}
+
+
 int main() {
+  vector<int> output = three_sum(vector<int>{1,-1,4,2}, 4);
+  for(const auto& c : output) {
+    cout << c << " ";
+  }
+  cout << endl;
   return 0;
 }
