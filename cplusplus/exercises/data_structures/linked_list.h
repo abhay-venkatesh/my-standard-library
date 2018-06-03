@@ -1,8 +1,6 @@
 #include <cstddef>
 #include <iostream>
 
-#pragma once
-
 using namespace std;
 
 class Node {
