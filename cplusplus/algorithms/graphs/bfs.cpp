@@ -1,8 +1,6 @@
 #include <iostream>
 #include <vector>
 
-// TODO: Complete this
-
 using namespace std;
 
 void bfs(int curr, vector<vector<int>> graph,
