@@ -12,12 +12,7 @@ sum = -1
 Approach 1: Brute force
 Try all possible combinations, O(factorial)
 
-Approach 2: Dynamic programming
-Start with sub-problem of size 3
-Then, for problem of size 4, take the 3 numbers that produce
-min(dist(target, sum)) by trying all three
-
-Approach 3:
+Approach 2: Use 3sum algorithm
 
 */
 

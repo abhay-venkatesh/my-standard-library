@@ -1,4 +1,3 @@
 algorithms/3sum_closest
-algorithms/3sum
 algorithms/merge_intervals
 algorithms/next_permutation
