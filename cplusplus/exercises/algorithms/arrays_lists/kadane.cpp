@@ -33,6 +33,10 @@ that since we are taking only contiguous arrays that the running
 array becomes smaller than what is necessary. Therefore,
 we maintain a global sum as well.
 
+Why is this correct? Well, it is clear that we can have only two
+solutions for every subarray input[0:i+1]: include or take only
+the element at i+1.
+
 */
 
 int kadane(vector<int> input) {

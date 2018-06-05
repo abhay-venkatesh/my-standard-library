@@ -16,7 +16,7 @@ input:
 output:
 0 4 1 2 3 5 6 (one possible)
 
-TODO: Complete this.
+TODO: Complete this
 
 */
 
@@ -35,11 +35,11 @@ public:
 
 void dfs(Node& root, unordered_map<int, bool>& visited) {
   if(visited.find(root.val) == visited.end()) {
-    visited[root.val] = true;
-    cout << root.val << " ";
+    return;
   }
   for(const auto neighbor: root.neighbors)
       dfs(*neighbor, visited);
+  visited[root.val] = true;
 }
 
 void dfs(Node root) {
