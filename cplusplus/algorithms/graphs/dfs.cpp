@@ -60,3 +60,37 @@ int main() {
 
   dfs(node0);
 }
+
+/*
+
+-------Correctness-------
+The goal of DFS is to produce a traversal depth-first,
+that is, to go in a direction until it is not possible to go any
+further, and then try another path.
+
+Here, we begin with a root node, and then perform DFS from there.
+First, we visit the root node, but checking if it has been previously
+visited. In this way, we never visit any node twice.
+
+I admit that this might be slighly less efficient since there are
+more than necessary function calls being made, but the asymptotic
+complexity should stay the same.
+
+After visiting each node, we call dfs on each of its neighbors.
+This recurses in the direction of first neighbor on each neighbor,
+and stops when no neighbors are left. This is DFS.
+
+-------Time Complexity-------
+We count the total number of function calls to DFS. First,
+we will call DFS once at least on each node. Then, for each node,
+we will call DFS on each of its neighbors. This leads to a
+worst case complexity of O(V + E).
+
+Now, if n is our problem size, then in the worst case, we can have
+a fully connected graph. In a fully connected graph, each node is
+connected to every other node.
+
+So, if there are n nodes, then there are n + (n-1) + (n-2) + ... + 1
+or equivalently, 1 + 2 + ... n = n(n+1)/2 edges.
+
+Therefore, we have O(n^2) complexity.
