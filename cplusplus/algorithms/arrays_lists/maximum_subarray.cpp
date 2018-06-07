@@ -5,7 +5,7 @@
 Given an array of negative and positive numbers (and 0),
 return the largest subarray possible.
 
-input = < 1 -2 4 -5 8 >
+input = < 1 -2 5 -4 8 >
 output = < 4 -5 8 >
 sum = 7
 
@@ -41,13 +41,49 @@ prefix or it does not.
 
 */
 
-int[] kadane(int[] input) {
-  if((sizeof(input)/sizeof(int)) == 0) return 0;
-  int max_till_now = input[0];
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+vector<int> kadane(vector<int> input) {
+  if(input.size() == 0) return vector<int>{};
+
+  int max_so_far = input.at(0);
+  int max_so_far_i = 0;
+  int max_so_far_j = 0;
+  int max_ending_here = input.at(0);
+  int max_ending_here_i = 0;
+  int max_ending_here_j = 0;
+  for(int i = 0; i < input.size(); i++) {
+    if(input.at(i) > max_ending_here + input.at(i)) {
+      max_ending_here = input.at(i);
+      max_ending_here_i = i;
+      max_ending_here_j = i;
+    } else {
+      max_ending_here = max_ending_here + input.at(i);
+      max_ending_here_j = i;
+    }
+
+    if(max_ending_here > max_so_far) {
+      max_so_far = max_ending_here;
+      max_so_far_i = max_ending_here_i;
+      max_so_far_j = max_ending_here_j;
+    }
+  }
+  cout << max_so_far_i << " " << endl;
+  cout << max_so_far_j << " " << endl;
+
+  return vector<int>{&input[max_so_far_i], &input[max_so_far_j+1]};
 }
 
 int main() {
-  int[] input = { 1, -2, 5, -4, 8};
-  int[] output = kadane(input);
+  vector<int> input = { 1, -2, 5, -4, 8};
+  vector<int> output = kadane(input);
+  for(const auto& n:output) {
+    cout << n << " ";
+  }
+  cout << endl;
   return 0;
 }
