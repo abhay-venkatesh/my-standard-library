@@ -16,11 +16,10 @@ input:
 output:
 0 4 1 2 3 5 6 (one possible)
 
-TODO: Complete this
-
 */
 
 #include<vector>
+#include<deque>
 #include<iostream>
 #include<unordered_map>
 
@@ -33,18 +32,21 @@ public:
   int val;
 };
 
-void dfs(Node& root, unordered_map<int, bool>& visited) {
-  if(visited.find(root.val) == visited.end()) {
+void dfs(Node& root, unordered_map<int, bool>& visited, deque<Node*>& toposort) {
+  if(visited.find(root.val) != visited.end()) {
     return;
   }
   for(const auto neighbor: root.neighbors)
-      dfs(*neighbor, visited);
+      dfs(*neighbor, visited, toposort);
   visited[root.val] = true;
+  toposort.push_front(&root);
 }
 
-void dfs(Node root) {
+deque<Node*> dfs(Node root) {
   unordered_map<int, bool> visited;
-  dfs(root, visited);
+  deque<Node*> toposort;
+  dfs(root, visited, toposort);
+  return toposort;
 }
 
 int main() {
@@ -60,5 +62,9 @@ int main() {
   node2.neighbors = vector<Node*>{ &node3 };
   node4.neighbors = vector<Node*>{ &node1, &node5 };
 
-  dfs(node0);
+  deque<Node*> output = dfs(node0);
+  for(const auto node: output)
+    cout << node->val << " ";
+  cout << endl;
+  return 0;
 }
