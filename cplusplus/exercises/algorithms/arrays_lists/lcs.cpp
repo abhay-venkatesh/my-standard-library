@@ -25,5 +25,26 @@ that is the longest common subsequence of X and Y.
 Since each sequence of length n has 2^n subsequences, the brute force would
 take O(2^n) tries.
 
+We begin by defining the ith prefix of X,Y,Z as Xi,Yi,Zi.
+That is, if X = [ABCDE], then X2 = [AB] and X0 is the empty sequence.
+
+Theorem: If X = [x1, x2, ..., xm] and Y = [y1, y2, ..., ym], and we let
+Z = [z1, z2, ..., zk] be any LCS of X and Y, then we have
+1. If xm = yn, then zk = xm = yn, and Zk-1 is an LCS of Xm-1 and Yn-1
+2. If xm != yn, then zk != xm implies that Z is an LCS of Xm-1 and Y
+3. If xm != yn, then zk  yn implies that Z is an LCS of X and Yn-1
+
+Proof:
+1. If zk != xm, then we could append xm = yn to Z to obtain a common
+subsequence of X and Y of length k+1, contradicting the supposition that Z
+is an LCS of X and Y.
+
+For example, consider X = [1, 2, 3, 4, 5, 7] and
+                      Y = [0, 2, 3, 4, 6, 7]
+
+                Then, Z = [2, 3, 4]
+
+We have xm = yn, but zk != xm. If we append xm = yn = 7 to Z, we do not obtain
+a common subsequence of length k+1.
 
 */
