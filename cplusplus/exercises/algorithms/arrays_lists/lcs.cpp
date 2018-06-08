@@ -65,4 +65,52 @@ assumption.
 
 3. Symmetric to 2.
 
+--- A Recursive Formulation for LCS ---
+
+Therefore, if we let c[i,j] denote the size of LCS for Xi and Yi,
+then,
+
+c[i,j] =
+Case 1: 0 if i = 0 or j = 0
+Case 2: c[i-1,j-1] + 1 if xi = yi
+case 3: max(
+            c[i-1,j],
+            c[i,j-1]
+          ) if xi != yi
+
 */
+
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+vector<int> lcs(vector<int>& X, vector<int>& Y) {
+  vector<int> Z;
+  vector<vector<int>> table(X.size()+1, vector<int>(Y.size()+1, 0));
+
+  for(int i = 1; i < X.size()+1; i++) {
+    for(int j = 1; j < Y.size()+1; j++) {
+      if(X.at(i-1) == Y.at(j-1)) {
+        table.at(i).at(j) = table.at(i-1).at(j-1) + 1;
+        Z.push_back(X.at(i-1));
+      } else {
+        table.at(i).at(j) = max(table.at(i-1).at(j), table.at(i).at(j-1));
+      }
+    }
+  }
+  return Z;
+}
+
+
+int main() {
+  vector<int> X = { 1, 2, 3, 4, 5, 7 };
+  vector<int> Y = { 0, 2, 3, 4, 5 };
+  vector<int> Z = lcs(X,Y);
+  for(const auto& n:Z) {
+    cout << n << " ";
+  }
+  cout << endl;
+
+  return 0;
+}
