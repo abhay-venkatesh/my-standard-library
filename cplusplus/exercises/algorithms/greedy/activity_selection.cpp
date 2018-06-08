@@ -7,22 +7,48 @@ start_times = [], and end times end_times = [].
 Our goal is to select the most amount of activities that are
 non-overlapping.
 
---- The optimal substructure of the problem ---
-Can we solve subproblems of this problem independently,
-and then use the subproblems to construction a solution to the
-original problem?
+--- Optimal Substructure of the Activity Selection Problem ---
+Let S[i][j] denote the set of all activities with starting time i and
+ending time before j.
 
-Say we have the solution to some subproblem S[i][j],
-that includes all activities beginning at i, and ending before j.
+Can we construct a solution for problem S[i][j] from subproblems?
 
-Can we construct a solution to a larger problem S[i][j+1]?
-The decision here becomes only one that of whether an activity can
-be added or not.
+Basically, can we write
+
+S[i][j] = {
+case 1: ...,
+case 2: ...,
+case 3: ...,
+.
+.
+}
+
+?
 
 Consider the following example,
-start_times = [s1, s2, ...]
-end_times = [e1, e2, ...]
+start_times = [1, 3, 5, 9]
+end_times = [3, 4, 7, 10]
 
+S[][] = [
+  [0,0,0,0,0],
+  [0,0,0,0,0],
+  [0,0,0,0,0],
+  [0,0,0,0,0],
+  [0,0,0,0,0],
+]
+
+S[1][1] = ? =
+
+--- The Greedy Solution ---
+
+algorithm:
+  sort items by end_times
+  greedily pick item with earliest end_time
+
+proof:
+  maximal subset must contain the activity with earliest end time
+  if it did not,
+  TODO:
 */
 
 int main() {
