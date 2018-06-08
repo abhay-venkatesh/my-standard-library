@@ -32,7 +32,7 @@ Theorem: If X = [x1, x2, ..., xm] and Y = [y1, y2, ..., ym], and we let
 Z = [z1, z2, ..., zk] be any LCS of X and Y, then we have
 1. If xm = yn, then zk = xm = yn, and Zk-1 is an LCS of Xm-1 and Yn-1
 2. If xm != yn, then zk != xm implies that Z is an LCS of Xm-1 and Y
-3. If xm != yn, then zk  yn implies that Z is an LCS of X and Yn-1
+3. If xm != yn, then zk != yn implies that Z is an LCS of X and Yn-1
 
 Proof:
 1. If zk != xm, then we could append xm = yn to Z to obtain a common
@@ -44,7 +44,25 @@ For example, consider X = [1, 2, 3, 4, 5, 7] and
 
                 Then, Z = [2, 3, 4]
 
-We have xm = yn, but zk != xm. If we append xm = yn = 7 to Z, we do not obtain
-a common subsequence of length k+1.
+We have xm = yn, but zk != xm. If we append xm = yn = 7 to Z, we obtain
+a common subsequence of length k+1, which contradicts the supposition that Z
+is the LCS of X and Y. Therefore, xm = ym implies zk = xm = yn.
+
+Now, we also want to show that Zk-1 is an LCS of Xm-1 and Yn-1. Under the
+assumption that Z is an LCS, Zk-1 has to at least be a common subsequence. It
+has to also be the greatest possible one, otherwise Z could not be an LCS
+of X and Y.
+
+2. xm != yn, zk = yn, zk != xm.
+
+For example, consider X = [1, 2, 3, 4, 5, 7] and
+                      Y = [0, 2, 3, 4, 5]
+
+                Then, Z = [2, 3, 4, 5]
+
+Now, if Z were not an LCS of Xm-1 and Y, then that would contradict our LCS
+assumption.
+
+3. Symmetric to 2.
 
 */
