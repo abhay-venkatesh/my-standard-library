@@ -49,6 +49,47 @@ deque<Node*> dfs(Node root) {
   return toposort;
 }
 
+/*
+--- Kahn's Algorithm for Topological Sorting ---
+
+G <- Input Graph
+
+algorithm kahn(G):
+  Q = queue()
+  T = list()
+  Q <- all nodes n in G such that n has 0 in-degree
+  while Q is not empty:
+    curr = Q.pop()
+    T.insert(curr)
+    for each neighbor n of curr:
+      remove edge between n and curr
+      if n has 0 in-degree:
+        Q.push(n)
+
+  if Q is not empty:
+    throw exception("Graph is not a DAG")
+  else return T
+
+Test:
+G <- Input Graph:
+0   1-->2-->3
+|   ^
+|   |
+ -->4-->5
+|
+ -->6
+
+Q = [1]
+T = [0]
+curr = 0
+
+
+*/
+void kahn() {
+
+
+}
+
 int main() {
   Node node0{0};
   Node node1{1};
