@@ -77,7 +77,6 @@ case 3: max(
             c[i-1,j],
             c[i,j-1]
           ) if xi != yi
-
 */
 
 #include <vector>
