@@ -1,0 +1,53 @@
+/*
+INTRODUCTION
+*/
+
+We have three classes of problems:
+
+1. P (Polynomial)
+2. NP (Nondeterministic Polynomial)
+3. NP-Complete
+
+--- Polynomial ---
+Algorithms that are solvable in polynomial time.
+
+--- Nondeterministic Polynomial ---
+Algorithms that are verifiable in polynomial time.
+
+--- NP-Complete ---
+Algorithms whose status is unknown. There is no polynomial-time algorithm to
+solve problems in the class of NP-Complete. A problem is NP-Complete if it is
+in NP and at least as hard as any other problem in NP.
+
+Most theoretical computer scientists believe that NP-Complete problems are
+intractable.
+
+--- Decision Problems vs Optimization Problems ---
+NP-completeness can only be used to describe decision problems and not
+optimization problems.
+
+Optimization problems have the form of finding a solution to a problem
+with constraints, and decision problems have the form of answering a
+"Yes/No" question.
+
+--- Reductions ---
+However, optimization problems and decision problems can be connected to each
+other. Therefore, we discuss the difficulty of solving an optimization problem
+by relating it to a decision problem. This is called a reduction.
+
+/*
+POLYNOMIAL TIME ALGORITHMS
+*/
+
+--- Abstract Problems ---
+An abstract problem Q is a binary relation on a set of instances I
+and on a set of solutions S.
+
+For instance, for SHORTEST-PATH, an instance would be a triple consisting of
+<G,u,v>, where G is the graph, u is the source and v is the destination.
+A solution would be a sequence of vertices in the graph. The problem would be
+the relation that associates each instance with a solution.
+
+--- Abstract Decision Problem ---
+An abstract decision problem is a function that maps every instance in I
+to the set {0,1}.
