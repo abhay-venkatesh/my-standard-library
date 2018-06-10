@@ -47,7 +47,41 @@ recursively.
 
 using namespace std;
 
-void rod_cutting(vector<int> values) {
+/*
+L = 4
+V = [0,3,4,10,12]
+
+R[0] = 0
+R[1] = 3
+R[2] = 6
+R[3] = 10
+R[4] = 13
+
+*/
+void construct_solution(
+  vector<int>& solution,
+  vector<int> table,
+  vector<int> values
+) {
+
+  if(*table.end() == *values.end()) {
+    solution.push_back(table.size()-1);
+    return;
+  }
+
+  for(int l = table.size()-1; l >= 0; l--) {
+    for(int j = 1; j <= l; j++) {
+      if(table.at(l) == (values[j]+table[l-j])) {
+        if(l-j != 0) {
+          solution.push_back(l-j);
+          break;
+        }
+      }
+    }
+  }
+}
+
+vector<int> rod_cutting(vector<int> values) {
   int length = values.size()-1;
   vector<int> table = { 0 };
   int max_value = 0;
@@ -60,9 +94,17 @@ void rod_cutting(vector<int> values) {
     table.push_back(max_value);
   }
   cout << max_value << endl;
+
+  vector<int> solution;
+  construct_solution(solution, table, values);
+  return solution;
 }
 
 int main() {
-  rod_cutting(vector<int>{0,2,4,8,12});
+  vector<int> output = rod_cutting(vector<int>{0,1,4,10,12});
+  for(const int &n: output) {
+    cout << n << " ";
+  }
+  cout << endl;
   return 0;
 }
