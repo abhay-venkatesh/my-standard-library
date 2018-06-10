@@ -45,21 +45,24 @@ recursively.
 #include <vector>
 #include <algorithm>
 
+using namespace std;
+
 void rod_cutting(vector<int> values) {
-  int length = values.size();
+  int length = values.size()-1;
   vector<int> table = { 0 };
+  int max_value = 0;
   for(int l = 1; l <= length; l++) {
-    int max = V[l-1];
+    max_value = values[l];
     for(int j = 1; j <= l; j++) {
-      if((values[j-1]+table[l-j]) > max)
-        max = values[j-1]+table[l-j;
+      if((values[j]+table[l-j]) > max_value)
+        max_value = values[j]+table[l-j];
     }
-    table.at(l) = max;
+    table.push_back(max_value);
   }
-  cout << max << endl;
+  cout << max_value << endl;
 }
 
 int main() {
-  rod_cutting(vector<int>{2,4,8,12});
+  rod_cutting(vector<int>{0,2,4,8,12});
   return 0;
 }
