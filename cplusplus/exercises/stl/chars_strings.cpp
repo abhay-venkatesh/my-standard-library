@@ -1,18 +1,21 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
-#include <string>
 void string_basics() {
 
-}
-
-#include <cctype>
-void character_type_library() {
+  // Find something
+  string sentence = "A quick brown donkey";
+  string query = "brown";
+  if(sentence.find(query) != string::npos) {
+    string::size_type location = sentence.find("brown");
+    cout << sentence.substr(location, query.length()) << endl;
+  }
 
 }
 
 int main() {
-  character_type_library();
+  string_basics();
   return 0;
 }
