@@ -67,6 +67,37 @@ class LinkedList:
             yield curr
             curr = curr.next
 
+    def get_node_reference(self, val):
+        for node in self:
+            if node.val == val:
+                return node
+
+    def delete_by_reference(self, node):
+        if self.head is None:
+            return
+
+        if self.head == node:
+            if self.tail == self.head:
+                self.tail = self.head.next
+            self.head = self.head.next
+            return
+
+        if self.head.next is None:
+            return
+
+        prev = self.head
+        curr = self.head.next
+        while curr is not None:
+            if curr == node:
+                if curr.next is None:
+                    prev.next = None
+                    self.tail = prev
+                else:
+                    prev.next = curr.next
+
+            prev = curr
+            curr = curr.next
+
 
 if __name__ == "__main__":
     ll = LinkedList()
@@ -77,5 +108,7 @@ if __name__ == "__main__":
     ll.append(3)
     ll.append(4)
     ll.append(5)
+    del_node = ll.get_node_reference(4)
+    ll.delete_by_reference(del_node)
     for node in ll:
         print(node.val)
