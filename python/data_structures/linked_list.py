@@ -3,14 +3,15 @@ class Node:
         self.next = None
         self.val = None
         if val is not None:
-            self.val = val 
+            self.val = val
+
 
 class LinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
         self.length = 0
-     
+
     def append(self, val):
         if self.head is None:
             self.head = Node(val)
@@ -21,34 +22,60 @@ class LinkedList:
             self.tail = node
     """
     Case 1:
-    None 
-    
+    None
+
     Case 2:
-        LinkedList: 
-            [1]->None
-            head -> [1]
-            tail -> [1]
-    
-    case 3: 
-    
-    
-    """        
+    head -> None
+    tail -> None
+
+    Case 3:
+    [1]->[2]
+    head -> [1]
+    tail -> [2]
+    prev -> [1]
+    curr -> [2]
+    """
     def delete(self, val):
-        curr = self.head
+        if self.head is None:
+            return
+
+        if self.head.val == val:
+            if self.tail == self.head:
+                self.tail = self.head.next
+            self.head = self.head.next
+            return
+
+        if self.head.next is None:
+            return
+
         prev = self.head
+        curr = self.head.next
         while curr is not None:
             if curr.val == val:
-                if curr == self.head:
-                    self.head = None 
-                    self.tail = None
-                elif curr.next is None:
-                    
-                    
-                    
+                if curr.next is None:
+                    prev.next = None
+                    self.tail = prev
+                else:
+                    prev.next = curr.next
+
+            prev = curr
             curr = curr.next
-    
+
     def __iter__(self):
-        curr = self.head 
+        curr = self.head
         while curr is not None:
             yield curr
             curr = curr.next
+
+
+if __name__ == "__main__":
+    ll = LinkedList()
+    ll.append(1)
+    ll.append(2)
+    ll.delete(1)
+    ll.delete(2)
+    ll.append(3)
+    ll.append(4)
+    ll.append(5)
+    for node in ll:
+        print(node.val)
