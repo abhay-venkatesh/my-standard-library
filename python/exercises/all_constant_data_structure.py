@@ -28,5 +28,12 @@ $ ao.display()
         |
 2: ["second"]
 
-
 """
+
+
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()
