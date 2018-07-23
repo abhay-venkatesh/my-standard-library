@@ -14,34 +14,33 @@ class BinaryTreeNode {
 }
 
 class BinaryTreeTraversal {
-  /*
-  1------\
-  2-\ 3-\
-
-
-  */
 
   public static void printBinaryTree(BinaryTreeNode root) {
-    // TODO:
-    Queue<BinaryTreeNode> queue = new LinkedList<BinaryTreeNode>();
-    queue.add(root);
-    int level = 0;
-    int height = getBinaryTreeDepth(root);
-    int num_nodes_on_level = 1;
-    int num_nodes_left_on_level = 1;
-    while(!queue.isEmpty()) {
-      BinaryTreeNode node = queue.remove();
-      printBinaryTreeLevel(node, level, height);
-      num_nodes_left_on_level -= 1;
-      if(num_nodes_left_on_level == 0) {
-        level++;
-        num_nodes_on_level *= 2;
-        num_nodes_left_on_level = num_nodes_on_level;
-        height--;
-        System.out.println();
+    if(root != null) {
+      Queue<BinaryTreeNode> queue = new LinkedList<BinaryTreeNode>();
+      queue.add(root);
+
+      int level = 0;
+      int height = getBinaryTreeDepth(root);
+      int num_nodes_on_level = 1;
+      int num_nodes_left_on_level = 1;
+
+      while(!queue.isEmpty()) {
+        BinaryTreeNode node = queue.remove();
+        printBinaryTreeLevel(node, level, height);
+
+        num_nodes_left_on_level -= 1;
+        if(num_nodes_left_on_level == 0) {
+          level++;
+          num_nodes_on_level *= 2;
+          num_nodes_left_on_level = num_nodes_on_level;
+          height--;
+          System.out.println();
+        }
+
+        if(node.left != null) queue.add(node.left);
+        if(node.right != null) queue.add(node.right);
       }
-      if(node.left != null) queue.add(node.left);
-      if(node.right != null) queue.add(node.right);
     }
   }
 
@@ -51,6 +50,7 @@ class BinaryTreeTraversal {
     int height
   ) {
     System.out.print(node.val);
+    // Choose series for spacing between nodes on a level
     for(int i = 0; i < ((3*(height-2)) + 1); i++) {
       System.out.print("-");
     }
@@ -64,9 +64,28 @@ class BinaryTreeTraversal {
                     1 + getBinaryTreeDepth(root.right));
   }
 
-  public static List<Integer> iterativeInOrderTraversal(BinaryTreeNode root) {
-    // TODO:
-    return null;
+  public static void iterativeInOrderTraversal(BinaryTreeNode root) {
+    Stack<BinaryTreeNode> stack = new Stack<BinaryTreeNode>();
+    stack.push(root);
+    while(!stack.isEmpty() || root.left != null) {
+      while(root.left != null) {
+        stack.push(root.left);
+        root = root.left;
+      }
+      root = stack.pop();
+      System.out.println(root.val);
+      if(root.right != null) {
+        root = root.right;
+        stack.push(root);
+      }
+    }
+  }
+
+  public static void recursivePreOrderTraversal(BinaryTreeNode root) {
+    if(root == null) return;
+    System.out.println(root.val);
+    recursiveInOrderTraversal(root.left);
+    recursiveInOrderTraversal(root.right);
   }
 
   public static void recursiveInOrderTraversal(BinaryTreeNode root) {
@@ -106,6 +125,7 @@ class BinaryTreeTraversal {
 
   public static void main(String[] args) {
     BinaryTreeNode root = constructBST();
-    printBinaryTree(root);
+    recursiveInOrderTraversal(root);
+    iterativeInOrderTraversal(root);
   }
 }
