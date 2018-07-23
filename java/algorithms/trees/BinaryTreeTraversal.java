@@ -14,31 +14,48 @@ class BinaryTreeNode {
 }
 
 class BinaryTreeTraversal {
+  /*
+  1------\
+  2-\ 3-\
+
+
+  */
 
   public static void printBinaryTree(BinaryTreeNode root) {
     // TODO:
-    printBinaryTreeLevel(root, getBinaryTreeDepth(root));
     Queue<BinaryTreeNode> queue = new LinkedList<BinaryTreeNode>();
     queue.add(root);
+    int level = 0;
+    int height = getBinaryTreeDepth(root);
+    int num_nodes_on_level = 1;
+    int num_nodes_left_on_level = 1;
     while(!queue.isEmpty()) {
       BinaryTreeNode node = queue.remove();
-      if(node.left != null) {
-        printBinaryTreeLevel(node.left, getBinaryTreeDepth(node));
-        queue.add(node.left);
+      printBinaryTreeLevel(node, level, height);
+      num_nodes_left_on_level -= 1;
+      if(num_nodes_left_on_level == 0) {
+        level++;
+        num_nodes_on_level *= 2;
+        num_nodes_left_on_level = num_nodes_on_level;
+        height--;
+        System.out.println();
       }
-      if(node.right != null) {
-        printBinaryTreeLevel(node.right, getBinaryTreeDepth(node));
-        queue.add(node.right);
-      }
+      if(node.left != null) queue.add(node.left);
+      if(node.right != null) queue.add(node.right);
     }
   }
 
-  private static void printBinaryTreeLevel(BinaryTreeNode root, int height) {
-    System.out.print(root.val);
-    for(int i = 0; i < ((2*height) + 1); i++) {
+  private static void printBinaryTreeLevel(
+    BinaryTreeNode node,
+    int level,
+    int height
+  ) {
+    System.out.print(node.val);
+    for(int i = 0; i < ((3*(height-2)) + 1); i++) {
       System.out.print("-");
     }
-    System.out.print("\\");
+    if(height-1 != 0) System.out.print("\\ ");
+    else System.out.print(" ");
   }
 
   public static int getBinaryTreeDepth(BinaryTreeNode root) {
