@@ -16,10 +16,10 @@ public:
 		int max_i = i;
 		int li = getLeftChild(i);
 		int ri = getRightChild(i);
-		if(this->array[li] > this->array[max_i]) {
+		if(li < this->array.size() && this->array[li] > this->array[max_i]) {
 			max_i = li;
 		}
-		if(this->array[ri] > this->array[max_i]) {
+		if(ri < this->array.size() && this->array[ri] > this->array[max_i]) {
 			max_i = ri;
 		}
 		if(max_i != i) {
@@ -30,8 +30,8 @@ public:
 
 	void swap(int i, int j) {
 		int temp = this->array[i];
-		this->array[j] = this->array[i];
-		this->array[i] = temp;
+		this->array[i] = this->array[j];
+		this->array[j] = temp;
 	}
 
 	/*
@@ -75,21 +75,45 @@ public:
 		return (2*i) + 1;
 	}
 
+	/*
+	array:
+	[-1, 1, 2, 3]
+
+	tree:
+	3-\
+	2 1
+
+	push(2)
+
+
+	*/
 	void push(int val) {
-		this->array.push_back(this->array.front());
-		this->array.front() = val;
-		maxHeapify(0);
+		if(this->array.size() <= 1) {
+			this->array.push_back(val);
+		} else {
+			this->array.push_back(this->array[1]);
+			this->array[1] = val;
+			maxHeapify(1);
+		}
 	}
 
 	int pop() {
-		int val = this->array.front();
-		this->array.front() = this->array.back();
+		int val = this->array[1];
+		this->array[1] = this->array.back();
 		this->array.pop_back();
-		maxHeapify(0);
+		maxHeapify(1);
 		return val;
 	}
 };
 
 int main() {
-	return -1;
+	Heap heap;
+	heap.push(2);
+	heap.push(3);
+	heap.push(1);
+	cout << heap.pop() << endl;
+	cout << heap.pop() << endl;
+	cout << heap.pop() << endl;
+
+	return 0;
 }
