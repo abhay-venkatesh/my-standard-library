@@ -1,4 +1,0 @@
---- Optimal Substructure ---
-
-A problem exhibits _optimal substructure_, if the optimal solution to a problem
-contains within itself optimal solutions to subproblems.
