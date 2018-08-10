@@ -41,6 +41,18 @@ def searchRange(A, target):
     i, j is the range of interest, that is the range in which our target
     will be present. In arguing about the correctness of this piece of code,
     we want to understand how i, j move and when the loop ends.
+
+    Imagine that we are searching on 
+    [1, 1, 1, 2, 2, 4, 4, 5]
+    [0, 1, 2, 3, 4, 5, 6, 7]
+
+    with target = 2.
+
+    We would find, possibly, the number 2 on index 4. We would then assign
+    j to 4, and perhaps i = 2.
+
+    By moving j towards the target, we force the mid to go leftwards,
+    and we want to go as leftward as possible. 
     """
     i = 0
     j = len(A) - 1
