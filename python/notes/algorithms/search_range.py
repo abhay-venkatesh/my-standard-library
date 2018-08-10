@@ -10,7 +10,9 @@ two numbers:
 But do we have to explicitly check that there is no same number on the left
 or right? What if we keep moving in the leftward or rightward directions
 until we no longer match?
+"""
 
+"""
 Example:
 A = [1, 1, 1, 2, 2, 4, 4, 5]
 target = 2
@@ -19,9 +21,27 @@ i = 3
 j = 3
 ret = (-1, -1)
 mid = 2
-
 """
 def searchRange(A, target):
+    """
+    We begin with i = 0, j = len(A) - 1
+    The loop terminates when i >= j, or more specifically,
+    when i == j because mid would never return the number j itself,
+    unless mid = 2*j, but that happens when i == j and the loop terminates
+    when i == j.
+
+    For our binary search routine, we have compare A[mid] to target,
+    we will then have three possibilities:
+
+    1. A[mid] < target, which means that target is in A[mid + 1:]
+    2. A[mid] == target, which means that target is either at mid,
+        or on the left of mid
+    3. A[mid] > target, which means that the target is left of mid
+
+    i, j is the range of interest, that is the range in which our target
+    will be present. In arguing about the correctness of this piece of code,
+    we want to understand how i, j move and when the loop ends.
+    """
     i = 0
     j = len(A) - 1
     ret = (-1, -1)
