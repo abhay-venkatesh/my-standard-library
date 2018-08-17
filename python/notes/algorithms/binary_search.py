@@ -33,6 +33,7 @@ Basically, we define our loop invariant as: If our search target is present
 in the array A, then it is in the subarray A[i:j+1]. 
 
 At initialization this is trivially true. 
+At maintainence, we have two possibilities, 
 At termination, i == j,
 therefore, the element of interest would be at A[i]. 
 
