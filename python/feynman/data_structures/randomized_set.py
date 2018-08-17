@@ -4,11 +4,10 @@ class RandomizedSet:
     """
     count = 1
     vals = {
-        0: 1,
-        1: 2
+        0: 2
     }
     indices = {
-        1: 0
+        2: 0
     }
     
     """
@@ -48,12 +47,12 @@ class RandomizedSet:
         
         self.count -= 1
         
-        index = self.indices[val]
+        index = self.indices.pop(val, None)
         self.vals.pop(index, None)
-        self.indices.pop(val, None)
-        
-        val_ = self.vals[self.count]
-        self.indices[val_] = index
+                
+        max_indexed_val = self.vals.pop(self.count, None)
+        self.indices[max_indexed_val] = index
+        self.vals[index] = max_indexed_val
         return True
         
 
@@ -80,12 +79,14 @@ def main():
     val_with_max_index = 1
 
     """
-    rs = RandomizedSet()
-    rs.insert(0)
-    rs.remove(0)
-    rs.insert(-1)
-    print(rs.remove(0))
-
+    randomSet  = RandomizedSet()
+    randomSet.insert(1)
+    randomSet.remove(2)
+    randomSet.insert(2)
+    randomSet.getRandom()
+    randomSet.remove(1)
+    randomSet.insert(2)
+    print(randomSet.getRandom())
         
 if __name__ == "__main__":
     main()
