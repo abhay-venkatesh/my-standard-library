@@ -5,6 +5,7 @@ class Solution:
         :type n: int
         :rtype: float
         
+        --- Initial thoughts ---
         What does pow(x, n) do? It takes a number x, and then, 
         either multiplies x by itself n times, or divides x by itself n times,
         depending on the sign.
@@ -18,7 +19,7 @@ class Solution:
         anyway. But it seems to be in the manageable python recursion range,
         so should be fine.
         
-        Naive implementation:
+        --- Naive implementation ---
         if n == 0:
             return 1
         elif n < 0:
@@ -29,7 +30,7 @@ class Solution:
         But this cannot handle the massive tail depth. 
         Therefore, we need to iteratively implement it.
         
-        Iterative implementation:
+        --- Iterative implementation ---
         accumulator = 1.0
         n_ = abs(n)
         while n_ > 0:
@@ -46,5 +47,16 @@ class Solution:
         2147483647
         
         Therefore, we need an efficient implementation.
+        
+        --- Bit Shifting ? ---
         Squaring is easy with bit shifting. 
+        
+        So, we can compute easily, 1, 2, 4, 16, ... 
+        in constant time. What if we compute the closest square of two,
+        and then add the rest? 
+        
+        But then how do we know what to add next?
+        And how would we know whats the closest square of two?
+        
+        ---
         """
