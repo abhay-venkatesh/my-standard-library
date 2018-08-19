@@ -45,6 +45,14 @@ class Solution:
         tasks_with_counts.sort(reverse=True)
         n_ = n + 1
 
+        """
+        intervals = 0
+        buffer = [(3, 'A'), (2, 'B'), (1, 'C')]
+        buffer_ = []
+        n_ = 3
+
+
+        """
         intervals = 0
         buffer = deque(tasks_with_counts)
         buffer_ = deque()
@@ -62,7 +70,7 @@ class Solution:
                 n_ -= 1
                 intervals += 1
             buffer = buffer_
-            buffer = []
+            buffer_ = deque()
             n_ = n + 1
             
         return intervals
@@ -79,18 +87,34 @@ class Solution:
                 if task == prev:
                     count += 1
                 else:
-                    tasks_with_counts.append((count, task))
+                    tasks_with_counts.append((count, prev))
                     prev = task
                     count =  1
         if prev:
             tasks_with_counts.append((count, prev))
 
         return tasks_with_counts
+
+"""
+--- A Failing Test ---
+Input = ["A","A","A","A","A","A","B","C","D","E","F","G"]
+2
+
+We need to update our scheduling algorithm. The issue is that we need
+to spread out the Task A. In our scheduling pipeline, we should put in the
+task with the most counts, but we should also pull it out as soon as the 
+cooldown has finished. 
+
+buffer = [(A, 6), (B, 1), (C, 1), (D, 1), (E, 1), (F, 1), (G, 1)]
+
+Priority queue? With priority as the cooldown time left.
+But then how do we handle time? At every point in our algorithm,
+we are at a different piece of time.
+
+"""
     
 def main():
-    s = Solution()
-    tasks = ["A", "A", "A", "B", "B", "C"]
-    print(s.leastInterval(tasks, 3))
+    pass
 
 if __name__ == "__main__":
     main()
