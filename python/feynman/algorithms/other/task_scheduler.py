@@ -1,3 +1,5 @@
+from collections import deque
+
 class Solution:
     def leastInterval(self, tasks, n):
         """
@@ -17,20 +19,51 @@ class Solution:
         In order to do so, we basically minimize the idle time. We can minimize idle time by 
         scheduling tasks of different types back to back. 
         
-        [A: 3, B: 2, C: 1], n = 2
+        [B: 0, C: 1], n = 0
+        A, B, C, B, C, _, 
         
-        A,B,C,A,B,_
+        By sorting, we ensure that counting from the most frequently
+        occuring task makes sense, or we'd have to maintain an n for 
+        each task. So each task would have a cooldown but that seems like a 
+        lot of work to maintain.
         
-        [A: 1, B: 2, C: 3], n = 2
-        A,B,C,_
+        [A: 0, B: 0, C: 0], n = 3
+        A, B, C, _, A
+        
+        --- A different model ---
+        Can we improve our algorithm using a different data structure? 
+        Perhaps a queue? It seems natural to use queues in scheduling 
+        problems. 
+
+        It helps with mutating the list and simplifying our code.
+        We pull a task out of the buffer, decrement it, 
+        and then put it back. Perhaps we create another buffer,
+        and then once we done with our cooldown, we can replace
+        the buffer with the new buffer, and start again, till the list is out.
         """
         tasks_with_counts = self.getTasksWithCounts(tasks)
-        tasks_with_counts.sort()
-        
+        tasks_with_counts.sort(reverse=True)
+        n_ = n + 1
+
         intervals = 0
-        task_i = 0
-        while tasks_with_counts:
-            pass
+        buffer = deque(tasks_with_counts)
+        buffer_ = deque()
+        while buffer:
+            while buffer or n_ > 0:
+                if not buffer and not buffer_:
+                    return intervals 
+                if buffer:
+                    task = buffer.popleft()
+                    num = task[0]
+                    name = task[1]
+                    num -= 1
+                    if num > 0:
+                        buffer_.append((num, name))
+                n_ -= 1
+                intervals += 1
+            buffer = buffer_
+            buffer = []
+            n_ = n + 1
             
         return intervals
         
@@ -55,7 +88,9 @@ class Solution:
         return tasks_with_counts
     
 def main():
-    pass
+    s = Solution()
+    tasks = ["A", "A", "A", "B", "B", "C"]
+    print(s.leastInterval(tasks, 3))
 
 if __name__ == "__main__":
     main()
