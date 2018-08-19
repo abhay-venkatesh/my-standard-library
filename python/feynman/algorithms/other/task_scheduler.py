@@ -111,6 +111,28 @@ Priority queue? With priority as the cooldown time left.
 But then how do we handle time? At every point in our algorithm,
 we are at a different piece of time.
 
+--- A new algorithm --
+
+buffer = [(A, 6), (B, 1), (C, 1), (D, 1), (E, 1), (F, 1), (G, 1)]
+
+optimal scheduling: 
+A, B, C, A, D, E, A, F, G, A, _, _, A, _, _, A
+
+How did I do it? Well, for this particular algorithm, I knew I had to
+spread out A over the course of the execution in order to maximize its usage.
+
+If know what an optimal scheduling looks like, then we can try and find 
+out how to write a procedure that takes items out of our buffer, and then
+schedules them. 
+
+I need to find a way to be able to pull A out, when needed,
+
+--- Track ending time instead ---
+We maintain two buffers now, one contains all the jobs that need to be done,
+and then the other is the queue, which the scheduler places stuff onto.
+
+jobs = []
+queue = []
 """
     
 def main():
