@@ -131,8 +131,22 @@ I need to find a way to be able to pull A out, when needed,
 We maintain two buffers now, one contains all the jobs that need to be done,
 and then the other is the queue, which the scheduler places stuff onto.
 
-jobs = []
-queue = []
+--- Track earliest possible time ---
+jobs = [A, A, A, A, B, C, D], n = 2
+queue = [(A, 0), (A, 3), (A, 6), (A, 9), (B, 0), (C, 0), (D, 0)]
+
+We basically place into the queue the earliest possible time the
+task could be scheduled. 
+
+We make this queue a priority queue, and then we pull out stuff from the queue
+according to the earliest time it could be scheduled. 
+It is important to order first by priority, and then by letter. 
+
+But this is incorrect. It will schedule A, B, C, D... which is wrong.
+
+--- Number of tasks, and then earliest possible time ---
+
+
 """
     
 def main():
