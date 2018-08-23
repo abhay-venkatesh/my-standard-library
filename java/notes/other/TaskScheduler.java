@@ -2,7 +2,7 @@ public class TaskScheduler {
     public int leastInterval(char[] tasks, int n) {
 
         int[] c = new int[26];
-        for(char t : tasks){
+        for(char t : tasks) {
             c[t - 'A']++;
         }
         Arrays.sort(c);
