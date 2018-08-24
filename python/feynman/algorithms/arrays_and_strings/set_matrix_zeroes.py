@@ -100,10 +100,6 @@ class Solution:
                 if matrix[i][j] == "Flag":
                     matrix[i][j] = 0
 
-    def setZeroesForRow(self, i, matrix):
-        for j in range(len(matrix[i])):
-            matrix[i][j] = 0
-
 def main():
     import numpy as np
     s = Solution()
