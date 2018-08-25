@@ -74,4 +74,43 @@ class Solution1:
         j = 3, nums[j] = 6
         k = 4, nums[k] = 7
 
+        [1,10,5,2,8,3,6]
+
+        if i does not fit,
+        then increment all,
+        if j does not fit, then increment j and k
+        if k does not fit, then increment k
+
+        [4,7,8,6,6,7,4,1]
+        """
+
+class Solution2:
+    def increasing_triplet(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        
+        Consider,
+        nums = [x_0, ..., x_{n-1}]
+
+        We are interested in checking if there are indexes 0 <= i < j < k <= n-1
+        such that nums[i] < nums[j] < nums[k].
+
+        We begin by letting i = 0, j = 1, k = 2. We want to be able to search
+        all the indexes smartly, but not assuming any ordering on the nums. 
+
+        if nums[i] < nums[j] < nums[k] holds true for i = 0, j = 1, k = 2,
+        then we are done. Awesome. If not, then it is possible that:
+        1. i does not fit
+        2. j does not fit
+        3. k does not fit
+
+        or a combination of these don't fit. The thing is, the combinations
+        are not all equal. I mean that if i does not fit, then we
+        necessarily have to move i, j and k. If j does not fit, then we 
+        necessarily have to move both j and k. If k does not fit,
+        then we have to move k. These are all the possibilities. 
+
+        Therefore, we have reduced the decision space that we have, at least
+        at initialization. Does this hold true for any future states?
         """
