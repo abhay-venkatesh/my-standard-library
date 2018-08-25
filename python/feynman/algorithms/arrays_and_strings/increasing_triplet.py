@@ -113,4 +113,42 @@ class Solution2:
 
         Therefore, we have reduced the decision space that we have, at least
         at initialization. Does this hold true for any future states?
+
+        Say we are at any 0 <= i < j < k <= n-1. If i does not fit,
+        it is possible that nums[i+1] < nums[j] < nums[k] is the solution.
+        But when would we be in such a situation? Let us construct an example.
+
+        [8,8,8,8,4,6,7,7,7,7]
+        [0,1,2,3,4,5,6,7,8,9]
+        i = 3
+        j = 5
+        k = 7
+
+        Is it even possible to have reached to this state with our current
+        algorithm? Let us try:
+
+        [8,8,8,8,4,6,7,7,7,7]
+        [0,1,2,3,4,5,6,7,8,9]
+        i = 4
+        j = 5
+        k = 6
+
+        We never actually reach that state. This is because move our numbers
+        as a sliding window until we reach a state in which we could
+        possibly have a combination of i, j, k that satisfy our conditions.
+
+        For us to reach the following state:
+        [8,8,8,8,4,6,7,7,7,7]
+        [0,1,2,3,4,5,6,7,8,9]
+        i = 3
+        j = 5
+        k = 7
+
+        We needed to have gone up to
+        i = 3
+        j = 4
+        k = 5
+
+        and then decided that j does not fit, but that would only happen if
+        nums[i] < nums[k].
         """
