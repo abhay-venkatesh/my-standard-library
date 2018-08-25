@@ -152,3 +152,59 @@ class Solution2:
         and then decided that j does not fit, but that would only happen if
         nums[i] < nums[k].
         """
+
+class Solution3:
+    def increasing_triplet(self, nums):
+        """
+        nums = [2,5,3,4,5]
+        nums = [0,1,2,3,4]
+        1,9,0
+        i = 1
+        j = 3
+        k = 4
+
+        """
+        if len(nums) < 3:
+            return False 
+            
+        i = 0
+        j = 1
+        k = 2
+        while k < len(nums):
+            if nums[i] < nums[j] < nums[k]:
+                return True
+            
+            if nums[i] >= nums[k]:
+                i += 1
+                j += 1
+                k += 1
+            elif (nums[i] <= nums[j] >= nums[k] or 
+                  nums[i] >= nums[j] <= nums[k]):
+                j += 1
+                k += 1
+            else:
+                k += 1
+
+        return False
+
+def main():
+    s = Solution3()
+    testcases = [
+        ([8,8,8,8,8,6,7,7,7,7], False),
+        ([8,8,8,8,4,6,7,7,7,7], True),
+        ([1,2,3,4,5], True),
+        ([5,4,3,2,1], False),
+        ([2,1,5,0,4,6], True),
+        ([2,5,3,4,5], True),
+        ([1,0,0,0,0,0,10,0,0,0,0,0,100], True)
+    ]
+    for testcase in testcases:
+        nums = testcase[0]
+        output = testcase[1]
+        print(nums, output)
+        assert s.increasing_triplet(nums) == output
+        
+    
+
+if __name__ == '__main__':
+    main()
