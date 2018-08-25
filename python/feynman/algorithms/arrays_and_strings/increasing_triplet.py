@@ -187,8 +187,22 @@ class Solution3:
 
         return False
 
+import sys
+
+class Solution4:
+    def increasing_triplet(self, nums):
+        first, second = sys.maxsize, sys.maxsize
+        for num in nums:
+            if num <= first:
+                first = num
+            elif num <= second:
+                second = num
+            else:
+                return True
+        return False
+
 def main():
-    s = Solution3()
+    s = Solution4()
     testcases = [
         ([8,8,8,8,8,6,7,7,7,7], False),
         ([8,8,8,8,4,6,7,7,7,7], True),
