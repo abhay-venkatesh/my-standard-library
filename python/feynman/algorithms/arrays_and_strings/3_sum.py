@@ -55,6 +55,51 @@ def two_sum(nums, target):
             j -= 1
         else: 
             i += 1
+
+class Solution:
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        
+        nums = [-2,0,1,1,2]
+        threeSums = [
+            [-2,0,2]
+        ]
+        """
+        threeSums = []
+        nums.sort()
+        i = 0
+        while i < (len(nums)-2):
+            if i == 0 or (i > 0 and nums[i] != nums[i-1]):
+                twoSums = self.twoSums(nums[i+1:], -nums[i])
+                for twoSum in twoSums:
+                    threeSum = [nums[i]]
+                    threeSum.extend(twoSum)
+                    threeSums.append(threeSum)
+            i += 1
+            
+        return threeSums
+        
+        
+    def twoSums(self, nums, target):
+        i = 0
+        j = len(nums) - 1
+        twoSums = []
+        while i < j: 
+            if nums[i] + nums[j] == target:
+                twoSums.append([nums[i], nums[j]])
+                i += 1
+                j -= 1
+                while i < j and nums[i] == nums[i-1]:
+                    i += 1
+                while i < j and nums[j] == nums[j+1]:
+                    j -= 1
+            elif nums[i] + nums[j] > target:
+                j -= 1
+            else: 
+                i += 1
+        return twoSums
                 
 def main():
     sol = two_sum([-1, 0, 1, 2, 4, 6], -1)
