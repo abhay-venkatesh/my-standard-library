@@ -54,8 +54,21 @@ inorder = [<left_subtree><root><right_subtree>]
 2. Construct left subtree
 3. Construct right subtree
 """
-def build_stree(preorder, inorder):
+def build_tree(preorder, inorder):
     preorder = deque(preorder)
     inorder = deque(inorder)
-    queue = deque()
-    root = TreeNode(preorder.popleft)
+    # queue = deque()
+    root = TreeNode(preorder.popleft())
+    build_subtree(preorder, inorder, root)
+    
+def build_subtree(preorder, inorder, parent):
+    """
+    preorder = [<left_subtree><right_subtree>]
+    inorder = [<left_subtree><root><right_subtree>]
+    preorder = [9,20,15,7]
+    inorder = [9,3,15,20,7]
+    """
+    root = TreeNode(preorder.popleft())
+    return root
+    
+    
