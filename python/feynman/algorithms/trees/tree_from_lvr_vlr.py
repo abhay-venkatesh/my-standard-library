@@ -24,11 +24,29 @@ def build_tree_from_full_preorder(preorder):
     return root
     
 def build_full_preorder_iter(preorder):
+    """
+    preorder = [3,9,NULL,NULL,20,15,7]
+    
+    3---\
+    9
+    """
     stack = [preorder.popleft()]
+    parent = None
+    root = None
     while stack:
-        nodeval = stack.pop()
-        if nodeval == "NULL":
-            return
+        node_val = stack.pop()
+        if not root:
+            root = TreeNode(node_val)
+            parent = root
+        else:
+            if node_val != "NULL":
+                node = TreeNode(node_val)
+                parent.left = node
+                parent = node
+            else:
+                pass
+                
+            
 
         
     
