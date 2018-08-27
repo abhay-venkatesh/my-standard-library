@@ -5,50 +5,51 @@ class TreeNode:
         self.val = x
         self.left = None
         self.right = None
-
-def build_tree_from_full_preorder(preorder):
+    
+def build_tree(preorder, inorder):
     """
-    preorder = [3,9,NULL,NULL,20,15,7]
+    preorder = [3,9,20,15,7]
+    inorder = [9,3,15,20,7]
+
+    3-----\
+    9-\ 20-\
+        15 7
+        
+    preorder = [<root><left subtree><right subtree>]
+    inorder = [<left subtree><root><right subtree>]
+    
+    --- Test Run ---
+    --- build_tree(preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]) ---
+    i = 1
+    
+    3-----\
+    9-\
+    
+    --- build_tree(preorder = [20,15,7], inorder = [15,20,7]) ---
+    root = TreeNode(20)
+    i = 1
+    
+    20-\
+    15 7
+
+    --- build_tree(preorder = [7], inorder = [7]) ---
+    
     """
     if not preorder:
-        return
-        
-    rootval = preorder.popleft()
-    if rootval == "NULL":
         return 
-        
-    root = TreeNode(rootval)
-    root.left = build_tree_from_full_preorder(preorder)
-    root.right = build_tree_from_full_preorder(preorder)
-    
+
+    root = TreeNode(preorder[0])
+    i = 0
+    while inorder[i] != root.val:
+        i += 1
+    root.left = build_tree(preorder[1:i+1], inorder[:i])
+    root.right = build_tree(preorder[i+1:], inorder[i+1:])
     return root
+        
     
-def build_full_preorder_iter(preorder):
-    """
-    preorder = [3,9,NULL,NULL,20,15,7]
     
-    3---\
-    9
-    """
-    stack = [preorder.popleft()]
-    parent = None
-    root = None
-    while stack:
-        node_val = stack.pop()
-        if not root:
-            root = TreeNode(node_val)
-            parent = root
-        else:
-            if node_val != "NULL":
-                node = TreeNode(node_val)
-                parent.left = node
-                parent = node
-            else:
-                pass
-                
-            
+
 
         
-    
     
     
