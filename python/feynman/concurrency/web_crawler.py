@@ -26,9 +26,11 @@ class WebCrawler:
             if k == 0:
                 self.q.task_done()
                 break
+                
             page = get_page(url)
-            urls = get_urls(page)
             write_to_disk(page)
+            urls = get_urls(page)
+            
             urls_k = [(url, k-1) for url in urls]
             for url_k in urls_k:
                 self.q.put(url_k)
